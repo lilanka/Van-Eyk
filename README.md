@@ -11,7 +11,8 @@ just like other DL frameworks
 
 
 TODO: 
-  setting up the project -> python c/c++ integration
+  setting up the project -> python c/c++ integration 
+      Boost.python doesn't work -> heading to pybind11 :: bybind11 works => Operation done
   
   tensor :: planing on eigen3
   implementing the paper 
