@@ -9,7 +9,7 @@ int add(int i, int j) {
   return i + j;
 }
 
-PYBIND11_MODULE(test, m) {
+PYBIND11_MODULE(lil_test, m) {
   m.doc() = "pybind11 example plugin";
   m.def("add", &add, "A function which adds two numbers");
 }
