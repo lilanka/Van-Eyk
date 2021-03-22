@@ -4,7 +4,7 @@ Implementation of the paper https://vsitzmann.github.io/siren/ (first principle 
 
 
 --------------------------------------------------------------------
-Heavy libraries are implemented in C/C++
+Heavy libraries are implemented in C/C++.
 frontend is done by python
 just like other DL frameworks
 --------------------------------------------------------------------

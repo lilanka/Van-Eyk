@@ -33,3 +33,6 @@
 
 *.swp
 *.swo
+
+# testing 
+build/
