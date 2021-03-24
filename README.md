@@ -2,9 +2,11 @@
 
 Implementation of the paper https://vsitzmann.github.io/siren/ (first principle method)
 
+All the libraries are done in C/C++ from scratch
+
 
 TODO: 
-  tensor :: planing on using numpy 
+  tensor :: taco :: done 
   implementing the paper 
   
     1. Weighting mechanism :: Initialization (Page 14) -> uniform distribution
