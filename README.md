@@ -3,18 +3,8 @@
 Implementation of the paper https://vsitzmann.github.io/siren/ (first principle method)
 
 
---------------------------------------------------------------------
-Heavy libraries are implemented in C/C++.
-frontend is done by python
-just like other DL frameworks
---------------------------------------------------------------------
-
-
 TODO: 
-  setting up the project -> python c/c++ integration 
-      Boost.python doesn't work -> heading to pybind11 :: bybind11 works => Operation done
-  
-  tensor :: planing on eigen3
+  tensor :: planing on using numpy 
   implementing the paper 
   
     1. Weighting mechanism :: Initialization (Page 14) -> uniform distribution
