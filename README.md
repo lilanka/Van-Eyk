@@ -1,6 +1,7 @@
+```
 # Project Van Eyk
 
-Implementation of the [siren](https://vsitzmann.github.io/siren/) paper (first principle method).  
+Implementation of the https://vsitzmann.github.io/siren/ paper (first principle method).  
 All the libraries are done in C/C++ from scratch.  
 
 TODO:   
@@ -19,3 +20,4 @@ TODO:
       2. making the tensor -> eyk.tensor()  
 
   == implementing the paper ==  
+```
