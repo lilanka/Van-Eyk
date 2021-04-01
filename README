@@ -1,4 +1,3 @@
-```
 # Project Van Eyk
 
 Implementation of the https://vsitzmann.github.io/siren/ paper (first principle method).  
@@ -20,4 +19,3 @@ TODO:
       2. making the tensor -> eyk.tensor()  
 
   == implementing the paper ==  
-```
