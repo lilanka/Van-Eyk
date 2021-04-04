@@ -10,6 +10,7 @@ TODO:
       
     plan: 
       user input tensor -> measure the dimension -> create that tensor -> return the tensor
+      building filling algorithm 
     
   2. input tensor shape, data type=float32 -> output tensor with numbers (numbers are chosen using distributions)  
   3. add/minus tensors -> added tensor  
