@@ -6,5 +6,5 @@ add_executable(
 )
 
 include_directories(
-  ${CMAKE_SOURCE_DIR}/include
+  ${cmake_source_dir}/include
 )
