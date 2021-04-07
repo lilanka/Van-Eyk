@@ -1,3 +1,12 @@
 # Project Van Eyk
 
-Pitched
+ENLI 6.7377|81.1031|0|31 c
+
+** Implement siren(https://arxiv.org/abs/2006.09661) using first principles.
+** To get deep understanding of the field of AI.
+
+* Only using numpy.
+* Other libraries are done in python.
+
+Reference :
+  Ian Goodfellow, Yoshua Bengio, and Aaron Courville. 2016. Deep Learning. The MIT Press.
