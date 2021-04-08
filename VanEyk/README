@@ -10,3 +10,17 @@ ENLI 6.7377|81.1031|0|31 c
 
 Reference :
   Ian Goodfellow, Yoshua Bengio, and Aaron Courville. 2016. Deep Learning. The MIT Press.
+
+--------------------------------------------------------------------
+
+classes :=
+  nn - building nn layers
+       activation functions
+       backprop capebilities (not sure yet)
+
+  distributions - different kind of parameter distributions 
+
+TODO :=
+  Reading siren paper  
+  make tensor library
+  Make a layerd nn 
