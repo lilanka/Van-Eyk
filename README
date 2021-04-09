@@ -15,12 +15,14 @@ Reference :
 
 classes :=
   nn - building nn layers
-       activation functions
+       activation functions :: done so far
        backprop capebilities (not sure yet)
 
   distributions - different kind of parameter distributions 
 
 TODO :=
-  Reading siren paper  
-  make tensor library
-  Make a layerd nn 
+  Reading siren paper  :: done
+  make tensor library  :: no (for now)
+  Make a layerd nn  :: doing :: how to set up weights for layers: done 
+                             -> making distribution options <- learning probability (Res:: Jaynes Probability theory)
+                             -> making forward function
