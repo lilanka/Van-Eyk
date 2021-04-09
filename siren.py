@@ -2,8 +2,8 @@
 
 import numpy as np
 
-from VanEyk.nn import nn
-from VanEyk.functions import F
+from vaneyk.nn import nn
+from vaneyk.functions import F
 
 class sirenNN:
   def __init__(self, input_size, l1_size, l2_size, output_size):

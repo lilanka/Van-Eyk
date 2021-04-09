@@ -1,6 +1,6 @@
 import numpy as np
 
-from VanEyk.functions import F
+from vaneyk.functions import F
 
 class nn:
   """
