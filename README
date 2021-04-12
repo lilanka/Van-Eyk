@@ -2,26 +2,16 @@
 
 ENLI 6.7377|81.1031|0|31 c
 
-** Implement siren(https://arxiv.org/abs/2006.09661) using first principles.
+** Implementation of latest papers using first principles.
 ** To get deep understanding of the field of AI.
 
-* Only using numpy.
-* Other libraries are done in python.
+** All the papers are implemented using custom DL library. Named as vaneyk (Van Eyck is an ancient painter :)) 
+
+Implemented papers
+  1. Siren ( Currently working on)
 
 Reference :
   Ian Goodfellow, Yoshua Bengio, and Aaron Courville. 2016. Deep Learning. The MIT Press.
-
---------------------------------------------------------------------
-
-classes :=
-  nn - building nn layers
-       activation functions :: done so far
-       backprop capebilities (not sure yet)
-
-  distributions - different kind of parameter distributions 
-
->> input -> (no. of datasets, input dimension)
-
 
 TODO :=
   Reading siren paper  :: done
@@ -30,3 +20,12 @@ TODO :=
                              -> building distribution options <- learning probability (Res:: Jaynes Probability theory)
                              -> building forward function :: done
                              -> building backprop
+                                  chain rule :: calculate the gradients
+                                  backprop algo :: to compute the chain rule
+
+backprop ::
+  find loss function :: mse :: done
+  find a way to minimize the loss -> use update methods .. Adam, SGD
+  loss.backward() -> this will backpropagate and change the weights
+
+----> Learn python heavily

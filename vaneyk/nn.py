@@ -6,7 +6,7 @@ class nn:
   """
   Linear nn
   """
-  def __init__(self, in_features: int, out_features: int, bias: bool = True) -> None:
+  def __init__(self, in_features: int=0, out_features: int=0, bias: bool = True) -> None:
     super(nn, self).__init__()
 
     """
@@ -29,5 +29,3 @@ class nn:
     """   
     x = F()
     return x.linear(in_tensor, self.weights, self.bias) 
-
-
