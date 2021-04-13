@@ -21,11 +21,11 @@ class sirenNN:
   def forward(self, in_tensor):
 
     o_l1 = self.layer1.forward(in_tensor)
-    x1 = self.f.Sine(o_l1) 
+    x1 = self.f.sine(o_l1) 
     o_l2 = self.layer2.forward(x1)
-    x2 = self.f.Sine(o_l2)
+    x2 = self.f.sine(o_l2)
     o_l3 = self.layer3.forward(x2)
-    x3 = self.f.Sine(o_l3)
+    x3 = self.f.sine(o_l3)
     return x3
 
 in_tensor = np.random.rand(100, 10)

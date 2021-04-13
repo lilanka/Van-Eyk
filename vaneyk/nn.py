@@ -28,4 +28,4 @@ class nn:
     Forward propagation
     """   
     x = F()
-    return x.linear(in_tensor, self.weights, self.bias) 
+    return x.nodeOp(in_tensor, self.weights, self.bias) 

@@ -25,7 +25,5 @@ TODO :=
 
 backprop ::
   find loss function :: mse :: done
-  find a way to minimize the loss -> use update methods .. Adam, SGD
+  find a way to minimize the los -> use update methods .. Adam, SGD :: currently doing adam
   loss.backward() -> this will backpropagate and change the weights
-
-----> Learn python heavily
