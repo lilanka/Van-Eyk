@@ -22,6 +22,12 @@ TODO :=
                              -> building backprop
                                   chain rule :: calculate the gradients
                                   backprop algo :: to compute the chain rule
+                             -> Skipping backprop -> use automatic differentiation instead of autograd.
+                             -> Implementing my own autograd
+
+implement in functions F
+  matmul :: matrix multiplication
+  add    :: matrix add 
 
 backprop ::
   find loss function :: mse :: done
