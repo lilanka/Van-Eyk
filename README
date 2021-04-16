@@ -15,21 +15,4 @@ Reference :
 
 TODO :=
   Reading siren paper  :: done
-  make tensor library  :: no (for now)
-  Make a layerd nn  :: doing :: how to set up weights for layers: done 
-                             -> building distribution options <- learning probability (Res:: Jaynes Probability theory)
-                             -> building forward function :: done
-                             -> building backprop
-                                  chain rule :: calculate the gradients
-                                  backprop algo :: to compute the chain rule
-                             -> Skipping backprop -> use automatic differentiation instead of autograd.
-                             -> Implementing my own autograd
-
-implement in functions F
-  matmul :: matrix multiplication
-  add    :: matrix add 
-
-backprop ::
-  find loss function :: mse :: done
-  find a way to minimize the los -> use update methods .. Adam, SGD :: currently doing adam
-  loss.backward() -> this will backpropagate and change the weights
+  Following Deeplearning course :: build from there
