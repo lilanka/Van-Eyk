@@ -16,3 +16,7 @@ Reference :
 TODO :=
   Reading siren paper  :: done
   Following Deeplearning course :: build from there
+
+1. Forward prop -> Automatically construct the computational graph in background 
+2. Backprop
+3. Update weights using optimizer

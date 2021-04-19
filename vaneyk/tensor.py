@@ -1,17 +1,24 @@
 import numpy as np
 
-from nn.functional import *
 import engine 
+from nn.functional import F 
 
-class Tensor():
-  """Wrapper for np.array.
-  Allows interaction with VanEyk
-  """
-  def __init__(self, data: np.array, requires_grad: bool=False, is_leaf:bool=True, is_parameter:bool=False):
-    self.tensor = np.array(data)
+class Tensor:
+  __counter = 0  
+  def __init__(self, data, requires_grad=True, is_leaf=True, is_parameter=False):
+    if not requires_grad and not is_leaf: 
+      raise ValueError('Non leaf nodes should be require_grad=True') 
+    self.id = Tensor.__counter
+    Tensor.__counter += 1
+
+    self.data = data
     self.requires_grad = requires_grad
-    self.tensor_info = (np.array(data), f"reqires_grad={requires_grad}")
+    
+    self.is_leaf = is_leaf
+    self.parent = []
+    self.grad = 0
 
+    self.f = F()
     #if requires_grad and is_leaf -> AccumulateGrad node. This node is a gradient enabled node that has no parent.
                                     #.apply() haddles accumulation gradients in the tensor's .grad
     #if is_leaf=False and requires_grad=True -> BackwardFunction an intermediate node, gradients are calculated and passed. not stored
@@ -22,27 +29,36 @@ class Tensor():
     # is_parameter -> tensor contains parameters of the network.
                       #if is_parameter =True -> requires_grad, is_leaf == True
     
-  def backward(self):
-    if self.requires_grad == False:
+  def backward(self, other):
+    if not self.requires_grad or is_parameter:
       raise ValueError(f"reqires_grad={self.requires_grad}. Can't generate gradient")
+    engine.backward(Tensor(np.ones(self.data.shape)))
 
-    _x = engine.backward(np.ones(self.tensor.shape))
+  def __sub__(self, other):
+    Tensor(other)
+    return self.f.Sub(self.data, other.data) 
 
-  def __sub__(self, x:np.array, y:np.array) -> np.array:
-    return Sub(x, y)
+  def __add__(self, other):
+    Tensor(other)
+    return self.f.Add(self.data, other.data) 
 
-  def __add__(self, x:np.array, y:np.array) -> np.array:
-    return Add(x, y)
+  def __matmul__(self, other):
+    Tensor(other)
+    return self.f.Mul(self.data, other.data) 
 
-  def __mul__(self, x:np.array, y:np.array) -> np.array:
-    return Mul(x, y)
+  def __truediv__(self, num):
+    return self.f.Div(self.data, num) 
 
-  def __truediv__(self, x:np.array, num) -> np.array:
-    return Div(x, num)
+  def shape(self):
+    return self.tensor.shape
 
-# *************** for testing
-x = Tensor(np.zeros((3, 4)))
-print(x.tensor)
-print(x.tensor_info)
-print(x.backward())
-print(np.random.rand(2, 3) - np.random.rand(2, 3))
+  def __repr__(self):
+    return f"tensor({self.data}, reqires_grad={self.requires_grad})"
+x1 = np.random.rand(1, 10) 
+x2 = np.random.rand(1, 10)
+x3 = np.random.rand(10, 100)
+x = Tensor(x1)
+y = Tensor(x2)
+s = engine.Function()
+print(x)
+print(s.apply(3, x2, x3))
