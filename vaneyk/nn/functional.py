@@ -19,10 +19,9 @@ class F:
     return np.subtract(x1, x2)
 
   def Mul(self, x1, x2):
-    print(x1.shape, x2.shape)
     if x1.shape[1] != x2.shape[0]:
       raise ValueError(f"shape()s {x1.shape()} and {x2.shape()} not aligned: {x1.shape()[1]} (dim 1) != {x2.shape()[0]} (dim 0)") 
-    return np.dot(x1, x2)
+    return x1 * x2
 
   def Div(self, x, num):
     if num == 0:
