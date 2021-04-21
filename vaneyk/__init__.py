@@ -1,2 +1,2 @@
-#from tensor import Tensor
-#from engine import Function 
+from .tensor import Tensor
+from .engine import Function

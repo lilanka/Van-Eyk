@@ -1,5 +1,7 @@
-from tensor import Tensor
-from engine import Function
+#!/usr/bin/env python3
+
+from vaneyk.tensor import Tensor
+from vaneyk.engine import Function
 import numpy as np
 
 x1 = np.random.rand(1, 5)

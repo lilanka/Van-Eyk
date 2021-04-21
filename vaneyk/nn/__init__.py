@@ -1,1 +1,1 @@
-from nn.functional import *
+from vaneyk.nn.functional import *

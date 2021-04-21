@@ -1,7 +1,7 @@
 import numpy as np
 
-import engine 
-from nn.functional import F 
+from vaneyk.engine import Function
+from vaneyk.nn.functional import F 
 
 class Tensor:
   __counter = 0  
@@ -20,6 +20,7 @@ class Tensor:
     self._grad = 0
   
     self.f = F()
+    self.fun = Function()
     #if requires_grad and is_leaf -> AccumulateGrad node. This node is a gradient enabled node that has no parent.
                                     #.apply() haddles accumulation gradients in the tensor's .grad
     #if is_leaf=False and requires_grad=True -> BackwardFunction an intermediate node, gradients are calculated and passed. not stored
@@ -36,7 +37,7 @@ class Tensor:
 
     # kicks off the DFS
     x = Tensor(np.full_like(self.data, 1))
-    engine.backward(Tensor(np.full_like(self.data, 1)))
+    self.fun.backward(Tensor(np.full_like(self.data, 1)))
     return x
 
   def __sub__(self, other):
@@ -59,7 +60,7 @@ class Tensor:
     return np.dot(self.data, other.data)
 
   def __repr__(self):
-    return f"Tensor({self.data!r}, reqires_grad={self.requires_grad!r})"
+    return f"Tensor({self.data}, reqires_grad={self.requires_grad})"
 
   @property
   def type(self):

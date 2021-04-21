@@ -2,7 +2,7 @@
 # PyTorch has Automatic differentiation algorithm Autograd. we have ADiff.
 
 import numpy as np
-from nn.functional import F
+from vaneyk.nn.functional import F
 
 def backward(): 
   pass
@@ -12,7 +12,7 @@ class Function:
     pass
 
   def apply(self, op, x1, x2):
-    import tensor 
+    from vaneyk.tensor import Tensor
 
     _out = {
         0 : lambda x1, x2 : x1 + x2,
@@ -27,9 +27,12 @@ class Function:
     if x1.requires_grad or x2.requires_grad:
       req_grad = True
 
-    _tensor = tensor.Tensor(_out, requires_grad=req_grad)
+    _tensor = Tensor(_out, requires_grad=req_grad)
    
     _tensor.parent.append(x1)
     _tensor.parent.append(x2)
     print(_tensor)
     return _tensor 
+
+  def backward():
+    backward()
