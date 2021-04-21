@@ -17,6 +17,6 @@ Reference :
 TODO :=
   ADiff (my version of PyTorch Autograd)
     1. Forward prop -> Automatically construct the computational graph in background  :: done
-    2. Backprop
+    2. Backprop :: all about depth first search
     3. Update weights using optimizer :: Adam for now
 
