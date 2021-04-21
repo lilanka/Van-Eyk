@@ -4,6 +4,7 @@ Any operation that effects the network's final loss should have an implementatio
 """
 import numpy as np
 
+
 class F:
   def __init__(self):
     pass
