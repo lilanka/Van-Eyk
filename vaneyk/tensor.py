@@ -17,8 +17,7 @@ class Tensor:
   """ 
   __counter = 0
   def __init__(self, data, requires_grad=True, is_leaf=False, is_parameter=False):
-    if not requires_grad and not is_leaf: 
-      raise ValueError('Non leaf nodes should be require_grad=True') 
+
     self.id = Tensor.__counter
     Tensor.__counter += 1
 
@@ -28,18 +27,40 @@ class Tensor:
     self.is_parameter = is_parameter
     self.is_leaf = is_leaf
 
-    self.parent = []
-    self._grad = 0
-    self.grad_fn = {'Op': ()} 
+    self.parents = None 
+    self.ctx = None
+    self._grad = None
 
     self.f = F()
 
+  # drawing the graph. Inspired by https://github.com/geohot/tinygrad
+  def deepwalk(self):
+    def _deepwalk(node, visited, nodes):
+      visited.add(node)
+      if node.parents:
+        [_deepwald(i, visited, nodes) for i in node.parents if i not in visited]
+        nodes.append(node)
+      return nodes
+    return _deepwalk(self, set(), [])
+
+  # Backpropagation
   def backward(self):
     if not self.requires_grad or self.is_parameter:
       raise ValueError(f"reqires_grad={self.requires_grad}. Can't generate gradient")
 
-    # kicks off the DFS
-    engine.backward(Tensor(np.full_like(self.data, 1)), )
+    self._grad = Tensor(np.ones(self.data.shape), requires_grad=False, is_leaf=False)
+
+    for node in reversed(self.deepwalk()):
+      assert (node._grad is not None)
+      grads = node.ctx.backward(node.ctx, node.grad.data)
+      if len(node.parents) == 1:
+        grads = [grads]
+      for t, g in zip(node.parents, grads):
+        if g is not None:
+          assert g.shape == t.shape, \
+              "grad shape must match tensor shape"
+          gt = Tensor(g, requires_grad=False, is_leaf=False)
+          t.grad = gt if t.grad is None else (t.grad + gt)
 
   def __sub__(self, other):
     other = other if isinstance(other, Tensor) else Tensor(other)
