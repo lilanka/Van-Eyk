@@ -3,6 +3,7 @@ import numpy as np
 from vaneyk.engine import Adiff 
 from vaneyk.nn.functional import F 
 
+
 class Tensor:
   """
   if requires_grad=True and is_leaf=True  -> AccumulateGrad node. This node is a gradient enabled node that has no parent.
@@ -27,9 +28,7 @@ class Tensor:
     self.is_parameter = is_parameter
     self.is_leaf = is_leaf
 
-    self.parents = None 
-    self.ctx = None
-    self._grad = None
+    self.parents, self.ctx, self._grad = None, None, None
 
     self.A = Adiff()
 
@@ -52,7 +51,7 @@ class Tensor:
 
     for node in reversed(self.deepwalk()):
       assert (node._grad is not None)
-      grads = node.ctx.backward(node.ctx, node._grad)
+      grads = node.ctx.backward(node.ctx, node._grad) 
       if len(node.parents) == 1:
         grads = [grads]
       for t, g in zip(node.parents, grads):
@@ -61,7 +60,6 @@ class Tensor:
               "grad shape must match tensor shape"
           gt = Tensor(g, requires_grad=False, is_leaf=False)
           t._grad = gt if t._grad is None else (t._grad + gt)
-      print(node)
 
   def __sub__(self, other):
     other = other if isinstance(other, Tensor) else Tensor(other)
