@@ -1,9 +1,6 @@
 import numpy as np
 
 class F:
-  def __init__(self):
-    pass
-
   def Add(self, x1, x2):
     if x1.shape != x2.shape:
       raise ValueError(\
@@ -17,9 +14,6 @@ class F:
     return np.subtract(x1, x2)
 
   def Mul(self, x1, x2):
-    if x1.shape[1] != x2.shape[0]:
-      raise ValueError(\
-          f"shape()s {x1.shape()} and {x2.shape()} not aligned: {x1.shape()[1]} (dim 1) != {x2.shape()[0]} (dim 0)") 
     return x1 * x2
 
   def Div(self, x, num):
@@ -33,6 +27,9 @@ class F:
   def Reshape(self, x, new_shape):
     # shape() should be (<shape()>)
     return np.reshape(x, new_shape)
+
+  def Pow(self, x, num):
+    return x ** num 
 
   def Log(self):
     """Element-wise log of a tensor"""

@@ -1,6 +1,6 @@
 import numpy as np
 
-import vaneyk.engine
+from vaneyk.engine import Adiff 
 from vaneyk.nn.functional import F 
 
 class Tensor:
@@ -31,14 +31,14 @@ class Tensor:
     self.ctx = None
     self._grad = None
 
-    self.f = F()
+    self.A = Adiff()
 
   # drawing the graph. Inspired by https://github.com/geohot/tinygrad
   def deepwalk(self):
     def _deepwalk(node, visited, nodes):
       visited.add(node)
-      if node.parents:
-        [_deepwald(i, visited, nodes) for i in node.parents if i not in visited]
+      if node.ctx:
+        [_deepwalk(i, visited, nodes) for i in node.parents if i not in visited]
         nodes.append(node)
       return nodes
     return _deepwalk(self, set(), [])
@@ -48,11 +48,11 @@ class Tensor:
     if not self.requires_grad or self.is_parameter:
       raise ValueError(f"reqires_grad={self.requires_grad}. Can't generate gradient")
 
-    self._grad = Tensor(np.ones(self.data.shape), requires_grad=False, is_leaf=False)
+    self._grad = Tensor(np.ones(self.data.shape), requires_grad=False)
 
     for node in reversed(self.deepwalk()):
       assert (node._grad is not None)
-      grads = node.ctx.backward(node.ctx, node.grad.data)
+      grads = node.ctx.backward(node.ctx, node._grad)
       if len(node.parents) == 1:
         grads = [grads]
       for t, g in zip(node.parents, grads):
@@ -60,26 +60,33 @@ class Tensor:
           assert g.shape == t.shape, \
               "grad shape must match tensor shape"
           gt = Tensor(g, requires_grad=False, is_leaf=False)
-          t.grad = gt if t.grad is None else (t.grad + gt)
+          t._grad = gt if t._grad is None else (t._grad + gt)
+      print(node)
 
   def __sub__(self, other):
     other = other if isinstance(other, Tensor) else Tensor(other)
-    return self.f.Sub(self.data, other.data) 
+    return self.A.apply('Sub', self, other)
 
   def __add__(self, other):
     other = other if isinstance(other, Tensor) else Tensor(other)
-    return self.f.Add(self.data, other.data) 
+    return self.A.apply('Add', self, other.data)
 
   def __mul__(self, other):
-    return self.f.Mul(self.data, other) 
+    other = other if isinstance(other, Tensor) else Tensor(other)
+    return self.A.apply('Mul', self, other)
 
-  def __truediv__(self, num):
-    return self.f.Div(self.data, num) 
- 
+  def __truediv__(self, other):
+    other = other if isinstance(other, Tensor) else Tensor(other)
+    return self.A.apply('Div', self, other)
+
+  def __pow__(self, other):
+    other = other if isinstance(other, Tensor) else Tensor(other)
+    return self.A.apply('Pow', self, other)
+
   @property
   def dot(self, other):
     other = other if isinstance(other, Tensor) else Tensor(other)
-    return np.dot(self.data, other.data)
+    return self.A.apply('Dot', self, other.data)
 
   def __repr__(self):
     return f"Tensor({self.data}, reqires_grad={self.requires_grad})"
