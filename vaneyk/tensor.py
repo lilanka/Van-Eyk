@@ -1,7 +1,7 @@
 import numpy as np
 
 from vaneyk.engine import Adiff 
-from vaneyk.nn.functional import F 
+from vaneyk.nn.functional import Add 
 
 
 class Tensor:
@@ -51,10 +51,11 @@ class Tensor:
 
     for node in reversed(self.deepwalk()):
       assert (node._grad is not None)
-      grads = node.ctx.backward(node.ctx, node._grad) 
+      grads = node.ctx.backward(node.data, node._grad) 
+      print(grads)
       if len(node.parents) == 1:
         grads = [grads]
-      for t, g in zip(node.parents, grads):
+      for t, g in zip(node, grads):
         if g is not None:
           assert g.shape == t.shape, \
               "grad shape must match tensor shape"
@@ -67,7 +68,7 @@ class Tensor:
 
   def __add__(self, other):
     other = other if isinstance(other, Tensor) else Tensor(other)
-    return self.A.apply('Add', self, other.data)
+    return self.A.apply('Add', self, other)
 
   def __mul__(self, other):
     other = other if isinstance(other, Tensor) else Tensor(other)
@@ -84,7 +85,7 @@ class Tensor:
   @property
   def dot(self, other):
     other = other if isinstance(other, Tensor) else Tensor(other)
-    return self.A.apply('Dot', self, other.data)
+    return self.A.apply('Dot', self, other)
 
   def __repr__(self):
     return f"Tensor({self.data}, reqires_grad={self.requires_grad})"
