@@ -7,11 +7,6 @@ All the papers are implemented using custom DL library(vaneyk). Van Eyck is an a
 
 vaneyk is similar to the PyTorch.   
 
-## Implementing  
-```
-  MuZero paper  
-```  
-
 ## Reference  
 ```
   Ian Goodfellow, Yoshua Bengio, and Aaron Courville. 2016. Deep Learning. The MIT Press.  
