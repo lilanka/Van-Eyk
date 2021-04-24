@@ -1,11 +1,9 @@
 # Project Van Eyk
 
-ENLI 6.7377|81.1031|0| c
-
 Implementation of latest papers using first principles.  
 To get deep understanding of the field of AI.  
 
-All the papers are implemented using custom DL library(vaneyk). Named as vaneyk (Van Eyck is an ancient painter :))  
+All the papers are implemented using custom DL library(vaneyk). Van Eyck is an ancient painter :)  
 
 vaneyk is similar to the PyTorch.   
 
