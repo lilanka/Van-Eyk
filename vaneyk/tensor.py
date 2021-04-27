@@ -43,6 +43,7 @@ class Tensor:
     return _deepwalk(self, set(), [])
 
   # Backpropagation
+  @property
   def backward(self):
     if not self.requires_grad or self.is_parameter:
       raise ValueError(f"reqires_grad={self.requires_grad}. Can't generate gradient")
